@@ -1,0 +1,86 @@
+---
+title: "day4-tasks"
+author: "Jaslyn Miura"
+format: html
+---
+
+```{r}
+
+# task 1
+
+weekdays <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+
+transects <- c("Transect A", "Transect B", "Transect C")
+
+out_matrix <- matrix(nrow = 7, ncol = 3)
+
+for (i in seq_along(weekdays)) {
+  for(j in seq_along(transects)) {
+    out_matrix[i, j] <- print(paste(weekdays[i], "-", transects[j]))
+  }
+}
+```
+
+```{r}
+
+# task 2
+
+force <- function(m, a) {
+  F <- m * a  
+  print(paste("The resulting force is", F, "Newtons"))
+}
+
+force(3, 2)
+```
+
+
+```{r}
+
+# task 3
+
+library(tidyverse)
+
+sci_names <- c("Chanos chanos", "Sphyraena barracuda", "Caranx ignobilis")
+common_name <- c("Milkfish", "Great barracuda",
+                 "Giant trevally")
+a_est <- c(0.0905, 0.0181, 0.0353)
+b_est <- c(2.52, 3.27, 3.05)
+
+fish_parms <- data.frame(sci_names, common_name, a_est, b_est)
+
+fish_weight <- function (fish_name, tot_length) {
+  fish_sub <- fish_parms %>% 
+    filter(common_name == fish_name)
+  weight <- fish_sub$a_est * (tot_length^fish_sub$b_est)
+  return(weight)
+}
+
+fish_weight(fish_name = "Milkfish", tot_length = 57)
+
+lengths_vector <- seq(from = 0, to = 100, by = 1)
+
+milkfish_weights <- fish_weight(fish_name = "Milkfish", tot_length = lengths_vector)
+
+milkfish_weights
+
+
+
+
+```
+
+```{r}
+
+# task 4
+
+wave_power <- function(H, time) {
+  0.5 * (H^2) * time
+}
+
+wave_heights <- seq(from = 0, to = 3, by = 0.2)
+# wave_period <- seq(from = 1, to = 8, by = 0.5)
+
+wave_power(wave_heights, time = 8)
+
+```
+
+
